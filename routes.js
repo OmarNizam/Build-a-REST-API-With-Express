@@ -79,4 +79,4 @@ router.post('/:qID/answers/:aID/vote-:dir', (req, res, next) => {
   })
 })
 
-module.exports = router
+module.exports = router;
