@@ -16,11 +16,11 @@ db.once("open", () => {
   const Schema = mongoose.Schema
 
   const AnimalSchema = new Schema({
-    type: String,
-    size: String,
-    color: String,
-    mass: Number,
-    name: String
+    type: { type: String, default: "goldfish" },
+    size: { type: String, default: "small" },
+    color: { type: String, default: "golden" },
+    mass: { type: Number, default: 0.007 },
+    name: { type: String, default: "Angela" }
   })
 
   const Animal = mongoose.model("Animal", AnimalSchema)
@@ -33,13 +33,21 @@ db.once("open", () => {
     name: "Lowrence"
   })
 
-  elephant.save((err) => {
-    if (err) console.error("Save Failed", err)
-    else console.log("Saved!") // When the object document saved then the call back fired then the db will close
-    db.close(() => {
-      console.log("db connection closed!")
-    })
-  })
+  const animal = new Animal({})  // create a generic animal means here goldfish // by passing an empty object to the Animal model
+
+  Animal.remove({}, (err) => {
+    if (err) console.error(err)
+      elephant.save((err) => {
+        if (err) console.error(err)
+          animal.save((err) => {
+            if (err) console.error(err)
+            db.close(() => {
+              console.log("db connection closed!")
+            })
+          })
+        })
+      })  // empty Animal model collection before we save any thing
+
 
 
 })
