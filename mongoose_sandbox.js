@@ -83,10 +83,6 @@ db.once("open", () => {
     wheal
   ]
 
-
-
-
-
   Animal.remove({}, (err) => {
     if (err) console.error(err)
     Animal.create(animalData, (err, animals) => {

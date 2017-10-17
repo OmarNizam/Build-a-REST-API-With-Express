@@ -2,7 +2,7 @@
 
 var express = require('express')
 var router = express.Router()
-
+var Question = require('./models')
 // GET /questions
 // route for questions collection
 router.get('/', (req, res) => {

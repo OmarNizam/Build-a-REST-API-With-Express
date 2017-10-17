@@ -9,6 +9,21 @@ const logger = require('morgan')
 app.use(logger("dev"))
 app.use(jsonParser())
 
+const mongoose = require('mongoose')
+
+mongoose.connect("mongodb://localhost:27017/qa") // qa is the data base name optional
+const db = mongoose.connection
+
+db.on('error', (err) => {
+  console.error('connection error:', err)
+})
+// once event is emited when the connection is ready to go. I tis means that the coonnection to the mongodb is open and
+// it 's ready to talk
+db.once("open", () => {
+  console.log("db connection successful")
+})
+
+
 app.use('/questions', routes)
 
 // catch 404 error and forward to error handler
